@@ -1,0 +1,85 @@
+{
+    "name": "craigpotter/barstool",
+    "description": "A Laravel package for logging Saloon Requests & Response.",
+    "keywords": [
+        "Craig Potter",
+        "laravel",
+        "barstool",
+        "saloonphp",
+        "logging"
+    ],
+    "homepage": "https://github.com/craigpotter/barstool",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Craig Potter",
+            "email": "1442635+craigpotter@users.noreply.github.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^10.0 | ^11.0",
+        "saloonphp/saloon": "^3.10.0",
+        "spatie/laravel-package-tools": "^1.16.4"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9.12",
+        "laravel/pint": "^1.20.0",
+        "nunomaduro/collision": "^7.10|^8.6.1",
+        "orchestra/testbench": "^8.24|^9.9",
+        "pestphp/pest": "^2.35|^3.7.4",
+        "pestphp/pest-plugin-arch": "^2.7|^3.0",
+        "pestphp/pest-plugin-laravel": "^2.4|^3.1",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan-deprecation-rules": "^1.2.1",
+        "phpstan/phpstan-phpunit": "^1.4.2",
+        "spatie/laravel-ray": "^1.39.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CraigPotter\\Barstool\\": "src/",
+            "CraigPotter\\Barstool\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CraigPotter\\Barstool\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "clear": "@php vendor/bin/testbench package:purge-barstool --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": [
+            "@composer run prepare",
+            "@php vendor/bin/testbench workbench:build --ansi"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer run build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CraigPotter\\Barstool\\BarstoolServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
