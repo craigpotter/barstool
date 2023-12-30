@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Saloon\Laravel\Events\SentSaloonRequest;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CraigPotter\Barstool\Commands\BarstoolCommand;
 
 class BarstoolServiceProvider extends PackageServiceProvider
 {

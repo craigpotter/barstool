@@ -26,5 +26,4 @@ class Barstool extends Model
         'response_headers' => 'array',
         'successful' => 'boolean',
     ];
-
 }

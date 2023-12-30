@@ -2,15 +2,15 @@
 
 namespace CraigPotter\Barstool;
 
-use Saloon\Http\Response;
 use Saloon\Http\PendingRequest;
+use Saloon\Http\Response;
 use Saloon\Laravel\Events\SentSaloonRequest;
 
 class Barstool
 {
     public static function record(SentSaloonRequest $request)
     {
-        if(! config('barstool.enabled')) {
+        if (! config('barstool.enabled')) {
             return;
         }
 
@@ -33,7 +33,7 @@ class Barstool
 
     private static function getResponseData(Response $response)
     {
-        if(! config('keep_successful_responses') && $response->failed()) {
+        if (! config('keep_successful_responses') && $response->failed()) {
             return null;
         }
 

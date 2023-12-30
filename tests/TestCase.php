@@ -2,9 +2,9 @@
 
 namespace CraigPotter\Barstool\Tests;
 
+use CraigPotter\Barstool\BarstoolServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CraigPotter\Barstool\BarstoolServiceProvider;
 
 class TestCase extends Orchestra
 {
