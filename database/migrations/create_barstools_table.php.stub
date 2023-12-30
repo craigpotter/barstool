@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+
+    /**
+     * Get the migration connection name.
+     */
+    public function getConnection(): string|null
+    {
+        return config('telescope.storage.database.connection');
+    }
+
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        $schema = Schema::connection($this->getConnection());
+
+        $schema->create('barstools', function (Blueprint $table) {
+            $table->id();
+            $table->timestamp('created_at')->useCurrent();
+            $table->string('connector_class')->index();
+            $table->string('request_class')->index();
+            $table->string('method');
+            $table->string('url');
+            $table->json('request_headers')->nullable();
+            $table->longText('request_body')->nullable();
+            $table->unsignedInteger('response_status')->nullable();
+            $table->json('response_headers')->nullable();
+            $table->longText('response_body')->nullable();
+            $table->boolean('successful');
+            $table->longText('fatal_error')->nullable();
+        });
+    }
+};

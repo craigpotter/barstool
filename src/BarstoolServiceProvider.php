@@ -2,6 +2,8 @@
 
 namespace CraigPotter\Barstool;
 
+use Illuminate\Support\Facades\Event;
+use Saloon\Laravel\Events\SentSaloonRequest;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use CraigPotter\Barstool\Commands\BarstoolCommand;
@@ -10,16 +12,17 @@ class BarstoolServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('barstool')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_barstool_table')
-            ->hasCommand(BarstoolCommand::class);
+            ->hasMigration('create_barstools_table');
+    }
+
+    public function packageBooted()
+    {
+        Event::listen(SentSaloonRequest::class, function (SentSaloonRequest $request) {
+            Barstool::record($request);
+        });
     }
 }
