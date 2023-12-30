@@ -17,7 +17,6 @@ class Barstool
         $entry = new Models\Barstool();
         $entry->fill([...self::getRequestData($request->pendingRequest), ...self::getResponseData($request->response)]);
         $entry->save();
-        dd($request, self::getResponseData($request->response), self::getRequestData($request->pendingRequest));
     }
 
     private static function getRequestData(PendingRequest $request)
