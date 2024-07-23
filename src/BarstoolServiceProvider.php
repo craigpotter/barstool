@@ -2,7 +2,11 @@
 
 namespace CraigPotter\Barstool;
 
+use GuzzleHttp\TransferStats;
 use Illuminate\Support\Facades\Event;
+use Saloon\Config;
+use Saloon\Http\PendingRequest;
+use Saloon\Http\Response;
 use Saloon\Laravel\Events\SentSaloonRequest;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -21,8 +25,34 @@ class BarstoolServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        Event::listen(SentSaloonRequest::class, function (SentSaloonRequest $request) {
+        ray()->clearAll();
+
+//        Event::listen(SentSaloonRequest::class, function (SentSaloonRequest $request) {
+//            ray($request);
+//            Barstool::record($request);
+//        });
+
+
+
+        Config::globalMiddleware()->onRequest(function (PendingRequest $request) {
+            ray('Request intercepted', $request);
+            $request->getConnector()->config()->add(
+                'barstool-request-time',
+                microtime(true) * 1000
+            );
+
             Barstool::record($request);
+        });
+
+        Config::globalMiddleware()->onResponse(function (Response $response) {
+            ray('Response intercepted', $response);
+
+            $response->getConnector()->config()->add(
+                'barstool-response-time',
+                microtime(true) * 1000
+            );
+
+            Barstool::record($response);
         });
     }
 }

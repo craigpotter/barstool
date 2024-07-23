@@ -24,6 +24,7 @@ return new class extends Migration
 
         $schema->create('barstools', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->index();
             $table->timestamp('created_at')->useCurrent();
             $table->string('connector_class')->index();
             $table->string('request_class')->index();
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->json('response_headers')->nullable();
             $table->longText('response_body')->nullable();
             $table->boolean('successful');
+            $table->float('duration')->nullable();
             $table->longText('fatal_error')->nullable();
         });
     }

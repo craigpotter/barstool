@@ -19,6 +19,7 @@ class Barstool extends Model
         'response_body',
         'response_status',
         'successful',
+        'duration',
     ];
 
     protected $casts = [
