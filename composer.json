@@ -77,10 +77,7 @@
         "laravel": {
             "providers": [
                 "CraigPotter\\Barstool\\BarstoolServiceProvider"
-            ],
-            "aliases": {
-                "Barstool": "CraigPotter\\Barstool\\Facades\\Barstool"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
