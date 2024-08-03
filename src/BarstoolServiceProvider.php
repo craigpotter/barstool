@@ -2,22 +2,20 @@
 
 namespace CraigPotter\Barstool;
 
-use GuzzleHttp\TransferStats;
-use Illuminate\Support\Facades\Event;
 use Saloon\Config;
+use Saloon\Enums\PipeOrder;
+use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\PendingRequest;
 use Saloon\Http\Response;
-use Saloon\Laravel\Events\SentSaloonRequest;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CraigPotter\Barstool\Commands\BarstoolCommand;
 
 class BarstoolServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('barstool')
+            ->name('laravel-barstool')
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_barstools_table');
@@ -26,33 +24,38 @@ class BarstoolServiceProvider extends PackageServiceProvider
     public function packageBooted()
     {
         ray()->clearAll();
+        Config::globalMiddleware()
+            ->onFatalException(function (FatalRequestException $exception) {
 
-//        Event::listen(SentSaloonRequest::class, function (SentSaloonRequest $request) {
-//            ray($request);
-//            Barstool::record($request);
-//        });
+                ray('Fatal exception intercepted', $exception);
 
+                Barstool::record($exception);
 
+            }, 'test', PipeOrder::FIRST)
+            ->onRequest(function (PendingRequest $request) {
+                ray('Request intercepted!!!!', $request);
+                $request->getConnector()->config()->add(
+                    'barstool-request-time',
+                    microtime(true) * 1000
+                );
 
-        Config::globalMiddleware()->onRequest(function (PendingRequest $request) {
-            ray('Request intercepted', $request);
-            $request->getConnector()->config()->add(
-                'barstool-request-time',
-                microtime(true) * 1000
-            );
+                Barstool::record($request);
+            })
 
-            Barstool::record($request);
-        });
+            ->onResponse(function (Response $response) {
+                ray('Response intercepted', $response);
 
-        Config::globalMiddleware()->onResponse(function (Response $response) {
-            ray('Response intercepted', $response);
+                $response->getConnector()->config()->add(
+                    'barstool-response-time',
+                    microtime(true) * 1000
+                );
 
-            $response->getConnector()->config()->add(
-                'barstool-response-time',
-                microtime(true) * 1000
-            );
+                if ($response->successful() && config('barstool.keep_successful_responses') === false) {
+                    return;
+                }
 
-            Barstool::record($response);
-        });
+                Barstool::record($response);
+            });
+
     }
 }

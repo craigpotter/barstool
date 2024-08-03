@@ -8,19 +8,6 @@ return [
     'enabled' => env('BARSTOOL_ENABLED', true),
 
     /*
-     * The route prefix used to access the Barstool UI.
-     */
-    'path' => 'barstool',
-
-    /*
-     * The middleware used on the Barstool UI route.
-     */
-    'middleware' => [
-        'web',
-        'auth',
-    ],
-
-    /*
      * The database connection where recordings will be stored.
      */
     'connection' => env('DB_CONNECTION', 'mysql'),
@@ -40,16 +27,12 @@ return [
      * Any connectors or requests that should be ignored from recording.
      */
     'ignore' => [
-        // SomeConnector::class,
-        // GetToken::class,
-    ],
-
-    /*
-     * Any connectors or requests that should only be recorded if they fail.
-     */
-    'only_failed' => [
-        // SomeConnector::class,
-        // GetToken::class,
+        'connectors' => [
+            // SomeConnector::class,
+        ],
+        'requests' => [
+            // SomeRequest::class,
+        ],
     ],
 
     /*

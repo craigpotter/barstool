@@ -2,11 +2,21 @@
 
 namespace CraigPotter\Barstool\Models;
 
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
 class Barstool extends Model
 {
+    use MassPrunable;
+
     const UPDATED_AT = null;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setConnection(config('barstool.connection'));
+    }
 
     protected $fillable = [
         'connector_class',
@@ -20,6 +30,7 @@ class Barstool extends Model
         'response_status',
         'successful',
         'duration',
+        'fatal_error',
     ];
 
     protected $casts = [
@@ -28,4 +39,13 @@ class Barstool extends Model
         'successful' => 'boolean',
     ];
 
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        return static::where('created_at', '<=', now()->subDays(config('barstool.keep_for_days')));
+    }
 }
