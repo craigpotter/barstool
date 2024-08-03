@@ -15,7 +15,7 @@ class BarstoolServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-barstool')
+            ->name('barstool')
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_barstools_table');

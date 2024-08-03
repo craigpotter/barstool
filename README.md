@@ -1,19 +1,15 @@
-# This is my package barstool
+# Barstool 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/craigpotter/barstool/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/craigpotter/barstool/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/craigpotter/barstool/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/craigpotter/barstool/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Bartool is a dedicated Laravel package to help you keep track of your [Saloon](https://github.com/saloonphp/saloon) requests & responses.
 
-## Support us
+Barstool will allow you to easily view, search, and filter your logs in a user-friendly interface or directly in your database tool of choice.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/barstool.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/barstool)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+So pull up a barstool, grab a drink, and let's get logging in the Saloon! Yeehaw!
 
 ## Installation
 
@@ -36,25 +32,8 @@ You can publish the config file with:
 php artisan vendor:publish --tag="barstool-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="barstool-views"
-```
-
 ## Usage
 
-```php
-$barstool = new CraigPotter\Barstool();
-echo $barstool->echoPhrase('Hello, Craig Potter!');
-```
 
 ## Testing
 
@@ -68,11 +47,11 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](../.github/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security related issues, please email barstool@craigpotter.co.uk instead of using the issue tracker.
 
 ## Credits
 
