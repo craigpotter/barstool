@@ -2,9 +2,9 @@
 
 namespace CraigPotter\Barstool\Tests;
 
+use CraigPotter\Barstool\BarstoolServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CraigPotter\Barstool\BarstoolServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -28,9 +28,8 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
         $migration = include __DIR__.'/../database/migrations/create_barstools_table.php.stub';
         $migration->up();
-        */
+
     }
 }

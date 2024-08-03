@@ -1,10 +1,12 @@
 {
     "name": "craigpotter/barstool",
-    "description": "This is my package barstool",
+    "description": "A Laravel package for logging Saloon Requests & Response.",
     "keywords": [
         "Craig Potter",
         "laravel",
-        "barstool"
+        "barstool",
+        "saloonphp",
+        "logging"
     ],
     "homepage": "https://github.com/craigpotter/barstool",
     "license": "MIT",
@@ -16,23 +18,23 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "illuminate/contracts": "^10.0",
-        "saloonphp/laravel-plugin": "^3.0",
-        "spatie/laravel-package-tools": "^1.14.0"
+        "php": "^8.3",
+        "illuminate/contracts": "^10.0 | ^11.0",
+        "saloonphp/saloon": "^3.10.0",
+        "spatie/laravel-package-tools": "^1.16.4"
     },
     "require-dev": {
-        "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.8",
-        "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^8.8",
-        "pestphp/pest": "^2.20",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "laravel/pint": "^1.17.1",
+        "nunomaduro/collision": "^7.10",
+        "larastan/larastan": "^v2.9.1",
+        "orchestra/testbench": "^8.24",
+        "pestphp/pest": "^2.35",
+        "pestphp/pest-plugin-arch": "^2.7",
+        "pestphp/pest-plugin-laravel": "^2.4",
+        "phpstan/extension-installer": "^1.4.1",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "spatie/laravel-ray": "^1.37.1"
     },
     "autoload": {
         "psr-4": {
