@@ -5,9 +5,16 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/craigpotter/barstool/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/craigpotter/barstool/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
 
+> [!CAUTION]
+> This package is currently in development and using in production should be at your own risk. 
+> Breaking changes could still happen before a stable v1.0. Please check back soon for updates.
+
 Bartool is a dedicated Laravel package to help you keep track of your [Saloon](https://github.com/saloonphp/saloon) requests & responses.
 
-Barstool will allow you to easily view, search, and filter your logs in a user-friendly interface or directly in your database tool of choice.
+Barstool will allow you to easily view, search, and filter your logs directly in your database tool of choice.
+
+The package is designed to be as simple as possible to get up and running, with minimal configuration required.
+However, a UI is planned for V1.0.0 to make it even easier to view your logs.
 
 So pull up a barstool, grab a drink, and let's get logging in the Saloon! Yeehaw!
 
