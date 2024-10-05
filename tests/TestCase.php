@@ -2,9 +2,10 @@
 
 namespace CraigPotter\Barstool\Tests;
 
+use Illuminate\Support\Facades\Schema;
+use Orchestra\Testbench\TestCase as Orchestra;
 use CraigPotter\Barstool\BarstoolServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -26,7 +27,7 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        Schema::dropAllTables();
 
         $migration = include __DIR__.'/../database/migrations/create_barstools_table.php.stub';
         $migration->up();

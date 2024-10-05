@@ -2,11 +2,16 @@
 
 namespace CraigPotter\Barstool\Models;
 
-use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\MassPrunable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property string $uuid
+ */
 class Barstool extends Model
 {
+    use HasFactory;
     use MassPrunable;
 
     const UPDATED_AT = null;
@@ -41,8 +46,6 @@ class Barstool extends Model
 
     /**
      * Get the prunable model query.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function prunable()
     {

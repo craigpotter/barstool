@@ -3,11 +3,11 @@
 namespace CraigPotter\Barstool;
 
 use Saloon\Config;
-use Saloon\Enums\PipeOrder;
-use Saloon\Exceptions\Request\FatalRequestException;
-use Saloon\Http\PendingRequest;
 use Saloon\Http\Response;
+use Saloon\Enums\PipeOrder;
+use Saloon\Http\PendingRequest;
 use Spatie\LaravelPackageTools\Package;
+use Saloon\Exceptions\Request\FatalRequestException;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class BarstoolServiceProvider extends PackageServiceProvider
@@ -21,19 +21,22 @@ class BarstoolServiceProvider extends PackageServiceProvider
             ->hasMigration('create_barstools_table');
     }
 
-    public function packageBooted()
+    public function packageRegistered()
     {
-        ray()->clearAll();
         Config::globalMiddleware()
             ->onFatalException(function (FatalRequestException $exception) {
-
-                ray('Fatal exception intercepted', $exception);
+                if (Barstool::shouldRecord($exception) === false) {
+                    return;
+                }
 
                 Barstool::record($exception);
 
-            }, 'test', PipeOrder::FIRST)
+            }, order: PipeOrder::FIRST)
             ->onRequest(function (PendingRequest $request) {
-                ray('Request intercepted!!!!', $request);
+                if (Barstool::shouldRecord($request) === false) {
+                    return;
+                }
+
                 $request->getConnector()->config()->add(
                     'barstool-request-time',
                     microtime(true) * 1000
@@ -41,9 +44,10 @@ class BarstoolServiceProvider extends PackageServiceProvider
 
                 Barstool::record($request);
             })
-
             ->onResponse(function (Response $response) {
-                ray('Response intercepted', $response);
+                if (Barstool::shouldRecord($response) === false) {
+                    return;
+                }
 
                 $response->getConnector()->config()->add(
                     'barstool-response-time',
@@ -56,6 +60,5 @@ class BarstoolServiceProvider extends PackageServiceProvider
 
                 Barstool::record($response);
             });
-
     }
 }
