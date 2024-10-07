@@ -26,6 +26,16 @@ jobs:
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
+    services:
+      mysql:
+        image: mysql:5.8
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: barstool_testing
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,3 +62,5 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest --ci
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
