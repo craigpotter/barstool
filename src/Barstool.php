@@ -65,11 +65,17 @@ class Barstool
 
     private static function getResponseData(Response $response): array
     {
+        if(in_array($response->headers()->get('Content-Type'), self::supportedContentTypes())) {
+            $responseBody = $response->body();
+        } else {
+            $responseBody = '<Unsupported Response Content>';
+        }
+
         return [
             'url' => $response->getPsrRequest()->getUri(),
             'status' => $response->failed() ? 'failed' : 'successful',
             'response_headers' => $response->headers()->all(),
-            'response_body' => $response->body(),
+            'response_body' => $responseBody,
             'response_status' => $response->status(),
             'successful' => $response->successful(),
         ];
@@ -140,5 +146,20 @@ class Barstool
             ]);
             $entry->save();
         }
+    }
+
+    /**
+     * Get the supported content types for response bodies.
+     * @return array<string>
+     */
+    private static function supportedContentTypes(): array
+    {
+        return [
+            'application/json',
+            'application/xml',
+            'text/xml',
+            'text/html',
+            'text/plain',
+        ];
     }
 }

@@ -11,8 +11,6 @@ class RequestWithConnector extends Request
 {
     /**
      * Define the HTTP method.
-     *
-     * @var string
      */
     protected Method $method = Method::GET;
 

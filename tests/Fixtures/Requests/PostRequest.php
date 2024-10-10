@@ -10,7 +10,9 @@ use Saloon\Traits\Body\HasStreamBody;
 class PostRequest extends Request implements HasBody
 {
     use HasStreamBody;
-
+    /**
+     * Define the HTTP method.
+     */
     protected Method $method = Method::POST;
 
     protected function defaultHeaders(): array

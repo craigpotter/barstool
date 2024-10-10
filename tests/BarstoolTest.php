@@ -1,5 +1,6 @@
 <?php
 
+use CraigPotter\Barstool\Tests\Fixtures\Requests\GetFileRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use Illuminate\Support\Facades\Artisan;
@@ -268,13 +269,15 @@ it('correctly records body, query, status & method', function () {
                     ['name' => 'Billy the Kid'],
                 ],
             ],
-            headers: ['token' => 'abc123'],
+            headers: ['token' => 'abc123', 'Content-Type' => 'application/json'],
             status: 200,
         ),
         PostRequest::class => MockResponse::make(
             body: [],
             status: 201,
+            headers: ['Content-Type' => 'application/json'],
         ),
+        GetFileRequest::class => MockResponse::fixture('get-file'),
     ]);
 
     $connector = new RandomConnector;
@@ -297,7 +300,7 @@ it('correctly records body, query, status & method', function () {
         ->request_body->toBeNull()
         ->response_status->toBe(200)
         ->successful->toBeTrue()
-        ->response_headers->toBe(['token' => 'abc123'])
+        ->response_headers->toBe(['token' => 'abc123', 'Content-Type' => 'application/json'])
         ->response_body->toBe(json_encode([
             'data' => [
                 ['name' => 'John Wayne'],
@@ -323,7 +326,42 @@ it('correctly records body, query, status & method', function () {
         ->request_body->toBe('<Streamed Body>')
         ->response_status->toBe(201)
         ->successful->toBeTrue()
-        ->response_headers->toBe([])
+        ->response_headers->toBe(['Content-Type' => 'application/json'])
         ->response_body->toBe('[]');
 
+    $request = new GetFileRequest();
+    $response = $connector->send($request);
+
+    $barstool = Barstool::where('uuid', $response->getPendingRequest()->headers()->get('X-Barstool-UUID'))->sole();
+
+    expect($barstool)
+        ->connector_class->toBe(RandomConnector::class)
+        ->request_class->toBe(GetFileRequest::class)
+        ->method->toBe('GET')
+        ->url->toBe('https://http.cat/images/418.jpg')
+        ->request_headers->toBe([
+            'X-Barstool-UUID' => $barstool->uuid,
+        ])
+        ->request_body->toBeEmpty()
+        ->response_status->toBe(200)
+        ->successful->toBeTrue()
+        ->response_headers->toBe([
+            'Age' => '68',
+            'NEL' => '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}',
+            'Date' => 'Thu, 10 Oct 2024 19:17:35 GMT',
+            'etag' => '"668d36cb-556f"',
+            'CF-RAY' => '8d08f3915a8f60ef-LHR',
+            'Server' => 'cloudflare',
+            'alt-svc' => 'h3=":443"; ma=86400',
+            'expires' => 'Thu, 31 Dec 2037 23:55:55 GMT',
+            'Report-To' => '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=lgJFDE1PZieCSO4IK5BWwV0I%2BNSvuveEgh11FqjElE3FcHg3kDkKmg29j8Y5tC4hGZZesZc7T8Gs8R53GcPR69G9ypdkimPz%2F2uPdYo1wBjfDxc%2FPIz9lwpZzw%3D%3D"}],"group":"cf-nel","max_age":604800}',
+            'Connection' => 'keep-alive',
+            'Content-Type' => 'image/jpeg',
+            'Accept-Ranges' => 'bytes',
+            'Cache-Control' => 'max-age=315360000',
+            'last-modified' => 'Tue, 09 Jul 2024 13:10:35 GMT',
+            'Content-Length' => '21871',
+            'CF-Cache-Status' => 'HIT',
+        ])
+        ->response_body->toBe('<Unsupported Response Content>');
 });

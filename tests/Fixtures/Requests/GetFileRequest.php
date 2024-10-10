@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace CraigPotter\Barstool\Tests\Fixtures\Requests;
 
 use Saloon\Enums\Method;
-use Saloon\Http\SoloRequest;
+use Saloon\Http\Request;
 
-class SoloUserRequest extends SoloRequest
+class GetFileRequest extends Request
 {
     /**
      * Define the HTTP method.
@@ -15,10 +13,10 @@ class SoloUserRequest extends SoloRequest
     protected Method $method = Method::GET;
 
     /**
-     * Define the endpoint for the request.
+     * @inheritDoc
      */
     public function resolveEndpoint(): string
     {
-        return 'https://tests.saloon.dev/api/user';
+        return 'https://http.cat/images/418.jpg';
     }
 }
