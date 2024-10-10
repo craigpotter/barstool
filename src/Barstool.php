@@ -65,7 +65,7 @@ class Barstool
 
     private static function getResponseData(Response $response): array
     {
-        if(in_array($response->headers()->get('Content-Type'), self::supportedContentTypes())) {
+        if (in_array($response->headers()->get('Content-Type'), self::supportedContentTypes())) {
             $responseBody = $response->body();
         } else {
             $responseBody = '<Unsupported Response Content>';
@@ -150,6 +150,7 @@ class Barstool
 
     /**
      * Get the supported content types for response bodies.
+     *
      * @return array<string>
      */
     private static function supportedContentTypes(): array

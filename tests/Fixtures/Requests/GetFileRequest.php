@@ -13,7 +13,7 @@ class GetFileRequest extends Request
     protected Method $method = Method::GET;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function resolveEndpoint(): string
     {

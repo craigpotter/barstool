@@ -1,6 +1,5 @@
 <?php
 
-use CraigPotter\Barstool\Tests\Fixtures\Requests\GetFileRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use Illuminate\Support\Facades\Artisan;
@@ -13,6 +12,7 @@ use function Pest\Laravel\assertDatabaseEmpty;
 
 use Saloon\Exceptions\Request\FatalRequestException;
 use CraigPotter\Barstool\Tests\Fixtures\Requests\PostRequest;
+use CraigPotter\Barstool\Tests\Fixtures\Requests\GetFileRequest;
 use CraigPotter\Barstool\Tests\Fixtures\Requests\SoloUserRequest;
 use CraigPotter\Barstool\Tests\Fixtures\Connectors\RandomConnector;
 use CraigPotter\Barstool\Tests\Fixtures\Requests\RequestWithConnector;
@@ -329,7 +329,7 @@ it('correctly records body, query, status & method', function () {
         ->response_headers->toBe(['Content-Type' => 'application/json'])
         ->response_body->toBe('[]');
 
-    $request = new GetFileRequest();
+    $request = new GetFileRequest;
     $response = $connector->send($request);
 
     $barstool = Barstool::where('uuid', $response->getPendingRequest()->headers()->get('X-Barstool-UUID'))->sole();
