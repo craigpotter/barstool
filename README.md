@@ -44,6 +44,24 @@ That's all folks!
 Once installed, it will start logging your [Saloon](https://github.com/saloonphp/saloon) requests automatically.
 Check the config out for more control. 
 
+Here are some of the things you can see with Barstool:
+- Request Method
+- Connector Used
+- Request Used
+- Request URL
+- Request Headers
+- Request Body
+- Response Status Code
+- Response Headers
+- Response Body
+- Response Duration
+
+The logging will even log fatal errors caused by your saloon requests so you can see what went wrong.
+<p><img src="/art/fatal_error.png" alt="Screenshot of the fatal error logged in the database"></p>
+
+> [!TIP]
+> We will be adding more features soon, so keep an eye out for updates!
+
 
 ## Testing
 
