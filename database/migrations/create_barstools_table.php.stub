@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function getConnection(): string|null
     {
-        return config('telescope.storage.database.connection');
+        return config('barstool.database_connection');
     }
 
     /**
