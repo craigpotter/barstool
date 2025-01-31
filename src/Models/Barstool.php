@@ -39,6 +39,12 @@ class Barstool extends Model
         'fatal_error',
     ];
 
+    protected $casts = [
+        'request_headers' => 'array',
+        'response_headers' => 'array',
+        'successful' => 'boolean',
+    ];
+
     /**
      * @param  array<string, mixed>  $attributes
      */
@@ -62,17 +68,5 @@ class Barstool extends Model
                 '<=',
                 now()->subDays(config('barstool.keep_for_days', 0))
             );
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function casts(): array
-    {
-        return [
-            'request_headers' => 'array',
-            'response_headers' => 'array',
-            'successful' => 'boolean',
-        ];
     }
 }
