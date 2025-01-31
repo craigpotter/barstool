@@ -10,7 +10,7 @@ return [
     /*
      * The database connection where recordings will be stored.
      */
-    'connection' => env('DB_CONNECTION', 'mysql'),
+    'connection' => env('BARSTOOL_DB_CONNECTION', env('DB_CONNECTION', 'mysql')),
 
     /*
      * The number of days to keep recordings for.
