@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Saloon\Config;
 use Saloon\Http\Faking\MockClient;
 use CraigPotter\Barstool\Tests\TestCase;

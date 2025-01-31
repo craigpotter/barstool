@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CraigPotter\Barstool;
 
 use Saloon\Http\Response;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Saloon\Http\PendingRequest;
+use Psr\Http\Message\UriInterface;
+use Saloon\Contracts\Body\BodyRepository;
 use Saloon\Repositories\Body\StreamBodyRepository;
 use Saloon\Exceptions\Request\FatalRequestException;
 
@@ -44,6 +48,17 @@ class Barstool
         };
     }
 
+    /**
+     * @return array{
+     *      connector_class: class-string,
+     *      request_class: class-string,
+     *      method: string,
+     *      url: string,
+     *      request_headers: array<string, string>|null,
+     *      request_body: BodyRepository|string|null,
+     *      successful: false
+     * }
+     */
     private static function getRequestData(PendingRequest $request): array
     {
         $body = $request->body();
@@ -63,6 +78,16 @@ class Barstool
         ];
     }
 
+    /**
+     * @return array{
+     *      url: UriInterface,
+     *      status: 'failed'|'successful',
+     *      response_headers: array<string, mixed>,
+     *      response_body: string,
+     *      response_status: int,
+     *      successful: bool
+     * }
+     */
     private static function getResponseData(Response $response): array
     {
         $responseBody = self::getResponseBody($response);
@@ -77,6 +102,17 @@ class Barstool
         ];
     }
 
+    /**
+     * @return array{
+     *      url: UriInterface,
+     *      status: 'fatal',
+     *      response_headers: null,
+     *      response_body: null,
+     *      response_status: null,
+     *      successful: false,
+     *      fatal_error: string
+     * }
+     */
     private static function getFatalData(FatalRequestException $exception): array
     {
         return [
@@ -102,14 +138,16 @@ class Barstool
         $entry->save();
     }
 
-    private static function recordResponse(Response|PendingRequest $data): void
+    private static function recordResponse(Response $data): void
     {
-        $uuid = $data->getPsrRequest()->getHeader('X-Barstool-UUID')[0] ?? null;
+        $psrRequest = $data->getPsrRequest();
+
+        $uuid = $psrRequest->getHeader('X-Barstool-UUID')[0] ?? null;
         if (is_null($uuid)) {
             return;
         }
 
-        $entry = Models\Barstool::where('uuid', $uuid)->first();
+        $entry = Models\Barstool::query()->firstWhere('uuid', $uuid);
 
         if ($entry) {
             $entry->fill([
@@ -120,12 +158,14 @@ class Barstool
         }
     }
 
-    /**
-     * @param  Response|PendingRequest  $data
-     */
-    public static function calculateDuration(Response|PendingRequest|FatalRequestException $data): mixed
+    public static function calculateDuration(Response|PendingRequest $data): int
     {
-        return $data->getConnector()->config()->get('barstool-response-time', microtime(true) * 1000) - $data->getConnector()->config()->get('barstool-request-time');
+        $config = $data->getConnector()->config();
+
+        $requestTime = (int) $config->get('barstool-request-time');
+        $responseTime = (int) $config->get('barstool-response-time', microtime(true) * 1000);
+
+        return $responseTime - $requestTime;
     }
 
     private static function recordFatal(FatalRequestException $data): void
@@ -133,7 +173,7 @@ class Barstool
         $pendingRequest = $data->getPendingRequest();
         $uuid = $pendingRequest->headers()->get('X-Barstool-UUID');
 
-        $entry = Models\Barstool::where('uuid', $uuid)->first();
+        $entry = Models\Barstool::query()->firstWhere('uuid', $uuid);
 
         if ($entry) {
             $entry->fill([
@@ -147,7 +187,7 @@ class Barstool
     /**
      * Get the supported content types for response bodies.
      *
-     * @return array<string>
+     * @return string[]
      */
     private static function supportedContentTypes(): array
     {
@@ -160,6 +200,9 @@ class Barstool
         ];
     }
 
+    /**
+     * @return array<string, string>|null
+     */
     public static function getRequestHeaders(PendingRequest $request): ?array
     {
         $excludedHeaders = config('barstool.excluded_request_headers', []);

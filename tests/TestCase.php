@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CraigPotter\Barstool\Tests;
 
 use Illuminate\Support\Facades\Schema;
