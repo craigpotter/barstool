@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CraigPotter\Barstool;
 
 use Saloon\Config;
@@ -21,7 +23,7 @@ class BarstoolServiceProvider extends PackageServiceProvider
             ->hasMigration('create_barstools_table');
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         Config::globalMiddleware()
             ->onFatalException(function (FatalRequestException $exception) {

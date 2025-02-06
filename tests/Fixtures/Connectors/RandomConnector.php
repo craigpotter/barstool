@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CraigPotter\Barstool\Tests\Fixtures\Connectors;
 
 use Saloon\Http\Connector;

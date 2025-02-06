@@ -1,6 +1,7 @@
 {
     "preset": "laravel",
     "rules": {
-        "ordered_imports": {"sort_algorithm":"length"}
+        "ordered_imports": {"sort_algorithm":"length"},
+        "declare_strict_types": true
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CraigPotter\Barstool\Database\Factories;
 
 use CraigPotter\Barstool\Models\Barstool;
@@ -7,11 +9,17 @@ use Saloon\Http\Connectors\NullConnector;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use CraigPotter\Barstool\Tests\Fixtures\Requests\SoloUserRequest;
 
+/**
+ * @extends Factory<Barstool>
+ */
 class BarstoolFactory extends Factory
 {
     protected $model = Barstool::class;
 
-    public function definition()
+    /**
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
         return [
             'uuid' => $this->faker->uuid,
