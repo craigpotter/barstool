@@ -2,6 +2,19 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## v0.2.0 - 2025-02-06
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/craigpotter/barstool/pull/13
+* PStan level 8 by @BinaryKitten in https://github.com/craigpotter/barstool/pull/12
+
+### New Contributors
+
+* @BinaryKitten made their first contribution in https://github.com/craigpotter/barstool/pull/12
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.1.2...v0.2.0
+
 ## Version v0.1.2 - 2025-01-31
 
 ### What's Changed
