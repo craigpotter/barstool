@@ -38,6 +38,16 @@ You can publish the config file with:
 php artisan vendor:publish --tag="barstool-config"
 ```
 
+You should also set up Laravel Model Pruning in your scheduler. Please check the Laravel Documentation for your version to know where to put the code below. 
+```php
+use CraigPotter\Barstool\Models\Barstool;
+
+
+Schedule::command('model:prune', [
+    '--model' => [Barstool::class],
+])->daily();
+```
+
 ## Usage
 
 That's all folks! 
