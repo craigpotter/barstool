@@ -12,6 +12,7 @@ use Psr\Http\Message\UriInterface;
 use Saloon\Contracts\Body\BodyRepository;
 use Saloon\Repositories\Body\StreamBodyRepository;
 use Saloon\Exceptions\Request\FatalRequestException;
+use Saloon\Repositories\Body\MultipartBodyRepository;
 
 class Barstool
 {
@@ -63,9 +64,11 @@ class Barstool
     {
         $body = $request->body();
 
-        if ($body instanceof StreamBodyRepository) {
-            $body = '<Streamed Body>';
-        }
+        $body = match (true) {
+            $body instanceof StreamBodyRepository => '<Streamed Body>',
+            $body instanceof MultipartBodyRepository => '<Multipart Body>',
+            default => $body,
+        };
 
         return [
             'connector_class' => get_class($request->getConnector()),
