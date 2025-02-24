@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('connector_class')->index();
             $table->string('request_class')->index();
             $table->string('method');
-            $table->string('url');
+            $table->text('url');
             $table->json('request_headers')->nullable();
             $table->longText('request_body')->nullable();
             $table->unsignedInteger('response_status')->nullable();
