@@ -2,6 +2,16 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## Version v0.4.0 - 2025-02-24
+
+### What's Changed
+
+* Fix | Add support for multipart body by @craigpotter in https://github.com/craigpotter/barstool/pull/15
+* Fix | Change Migration Stub for URL  by @craigpotter in https://github.com/craigpotter/barstool/pull/16
+* Update README.md with Prune instructions  by @craigpotter in https://github.com/craigpotter/barstool/pull/17
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.3.0...v0.4.0
+
 ## Version v0.3.0 - 2025-02-24
 
 ### What's Changed
