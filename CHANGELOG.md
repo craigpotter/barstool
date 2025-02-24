@@ -2,6 +2,14 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## Version v0.3.0 - 2025-02-24
+
+### What's Changed
+
+* Feature | Add Laravel 12 support by @craigpotter in https://github.com/craigpotter/barstool/pull/14
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.2.0...v0.3.0
+
 ## v0.2.0 - 2025-02-06
 
 ### What's Changed
