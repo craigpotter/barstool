@@ -256,10 +256,6 @@ class Barstool
 
         $body = $response->body();
 
-        if (is_string($body) === false) {
-            return '<Unsupported Barstool Response Content>';
-        }
-
         if (Str::startsWith(mb_strtolower((string) $response->headers()->get('Content-Type')), self::supportedContentTypes())) {
             return self::checkContentSize($body) ? $body : '<Unsupported Barstool Response Content>';
         }
