@@ -2,6 +2,19 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## Version v0.5.0 - 2025-02-26
+
+### What's Changed
+
+* Exclude authorization header by default by @JonPurvis in https://github.com/craigpotter/barstool/pull/19
+* account for a lowercase content-type header by @JonPurvis in https://github.com/craigpotter/barstool/pull/18
+
+### New Contributors
+
+* @JonPurvis made their first contribution in https://github.com/craigpotter/barstool/pull/19
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.4.0...v0.5.0
+
 ## Version v0.4.0 - 2025-02-24
 
 ### What's Changed
