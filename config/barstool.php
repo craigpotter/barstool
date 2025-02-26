@@ -60,6 +60,7 @@ return [
      * If all headers are ignored or an entire connector/request is ignored, only the X-Barstool-UUID will be logged.
      */
     'excluded_request_headers' => [
+        'Authorization',
         // '*', // All headers
         // 'token' // Exclude `token` header on all requests
         // SensitiveRequest::class // Exclude ALL headers for this request
