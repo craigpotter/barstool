@@ -2,6 +2,19 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## v0.6.0 - 2025-05-21
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/craigpotter/barstool/pull/20
+* Feature | Support application/soap+xml content type by @Sammyjo20 in https://github.com/craigpotter/barstool/pull/21
+
+### New Contributors
+
+* @Sammyjo20 made their first contribution in https://github.com/craigpotter/barstool/pull/21
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.5.0...v0.6.0
+
 ## Version v0.5.0 - 2025-02-26
 
 ### What's Changed
