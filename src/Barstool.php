@@ -197,6 +197,7 @@ class Barstool
         return [
             'application/json',
             'application/xml',
+            'application/soap+xml',
             'text/xml',
             'text/html',
             'text/plain',
