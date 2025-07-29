@@ -2,6 +2,14 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## v0.6.1 - 2025-07-29
+
+### What's Changed
+
+* Bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/22
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.6.0...v0.6.1
+
 ## v0.6.0 - 2025-05-21
 
 ### What's Changed
