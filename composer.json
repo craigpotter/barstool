@@ -81,5 +81,6 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "abandoned": "saloonphp/barstool"
 }

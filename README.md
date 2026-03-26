@@ -1,13 +1,16 @@
-# Barstool 
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/craigpotter/barstool/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/craigpotter/barstool/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/craigpotter/barstool/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/craigpotter/barstool/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
+# Barstool
 
 > [!CAUTION]
-> This package is currently in development and using in production should be at your own risk. 
-> Breaking changes could still happen before a stable v1.0. Please check back soon for updates.
+> **This package has been moved to [`saloonphp/barstool`](https://github.com/saloonphp/barstool).**
+> This repository is no longer maintained. Please update your `composer.json` to use `saloonphp/barstool` instead.
+>
+> ```bash
+> composer remove craigpotter/barstool
+> composer require saloonphp/barstool
+> ```
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
+[![Total Downloads](https://img.shields.io/packagist/dt/craigpotter/barstool.svg?style=flat-square)](https://packagist.org/packages/craigpotter/barstool)
 
 Bartool is a dedicated Laravel package to help you keep track of your [Saloon](https://github.com/saloonphp/saloon) requests & responses.
 
