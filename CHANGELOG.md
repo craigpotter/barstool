@@ -2,6 +2,22 @@
 
 All notable changes to `barstool` will be documented in this file.
 
+## v0.7.0 - 2026-03-26
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/23
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/24
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/27
+* Bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/25
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/26
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/craigpotter/barstool/pull/28
+* Chore | Upgrade to Saloon v4 by @Sammyjo20 in https://github.com/craigpotter/barstool/pull/29
+
+This should be the last release of Barstool under the current repo. Please use https://github.com/saloonphp/barstool going forward
+
+**Full Changelog**: https://github.com/craigpotter/barstool/compare/v0.6.1...v0.7.0
+
 ## v0.6.1 - 2025-07-29
 
 ### What's Changed
