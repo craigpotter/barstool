@@ -8,6 +8,8 @@ use Saloon\Http\Connector;
 
 class RandomConnector extends Connector
 {
+    public bool $allowBaseUrlOverride = true;
+
     public function resolveBaseUrl(): string
     {
         return 'https://craigpotter-not-real.dev';
